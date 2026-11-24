@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport de Projet - Pharmacie App</title>
+    <style>
+        :root {
+            --primary-color: #00A859;
+            --secondary-color: #2c3e50;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --code-bg: #2d2d2d;
+            --code-text: #f8f8f2;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+
+        .meta {
+            color: #666;
+            font-style: italic;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin-top: 25px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .image-container {
+            margin: 30px 0;
+            text-align: center;
+            background: #eee;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #555;
+            font-style: italic;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .keyword {
+            color: #ff79c6;
+        }
+
+        .type {
+            color: #8be9fd;
+        }
+
+        .string {
+            color: #f1fa8c;
+        }
+
+        .comment {
+            color: #6272a4;
+        }
+
+        .function {
+            color: #50fa7b;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 0.8em;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Rapport de Projet</h1>
+            <div class="meta">Application de Gestion de Pharmacie &bull; Janvier 2026 &bull;  </div>
+        </header>
+
+        <section id="intro">
+            <h2>1. Introduction</h2>
+            <p>Ce document présente l'état d'avancement et les fonctionnalités de l'application "Gestion de Pharmacie".
+                Développée en Java avec l'API Swing, cette solution vise à moderniser la gestion quotidienne d'une
+                officine (stocks, ventes, utilisateurs).</p>
+            <p>L'accent a été mis sur une interface utilisateur (UI) moderne, ergonomique et visuellement agréable,
+                utilisant un thème sombre ("Dark Mode") pour le confort visuel.</p>
+        </section>
+
+        <section id="ui">
+            <h2>2. Interface Graphique</h2>
+
+            <h3>2.1 Écran de Connexion (Login)</h3>
+            <p>L'accès à l'application est sécurisé par un écran de connexion distinguant les rôles (Pharmacien vs
+                Gestionnaire). Le design intègre un logo vectoriel personnalisé représentant le Bol d'Hygie.</p>
+            <div class="image-container">
+                <img src="login_screen.png" alt="Écran de Connexion">
+                <div class="caption">Figure 1 : Interface de connexion avec le nouveau logo</div>
+            </div>
+
+            <h3>2.2 Tableau de Bord (Dashboard)</h3>
+            <p>Le tableau de bord centralise les informations critiques. Il permet une visualisation rapide des
+                indicateurs de performance (KPIs) : stock total, alertes de stock critique, chiffre d'affaires et
+                fréquentation.</p>
+            <div class="image-container">
+                <img src="dashboard_screen.png" alt="Tableau de Bord">
+                <div class="caption">Figure 2 : Tableau de bord principal (Dashboard)</div>
+            </div>
+        </section>
+
+        <section id="code">
+            <h2>3. Analyse Technique</h2>
+            <p>L'application repose sur une architecture robuste. Voici une analyse du composant d'interface principal.
+            </p>
+
+            <h3>3.1 Modèle Client (Client.java)</h3>
+            <p>La classe <code>Client</code> représente l'entité cliente dans le système. Voici la structure de base
+                (champs et constructeurs).</p>
+
+            <pre><code><span class="keyword">import</span> java.sql.*;
+<span class="keyword">import</span> java.util.Vector;
+
+<span class="keyword">public class</span> <span class="type">Client</span> {
+    <span class="keyword">private</span> <span class="type">int</span> id_client;
+    <span class="keyword">private</span> <span class="type">String</span> nom;
+    <span class="keyword">private</span> <span class="type">String</span> prenom;
+    <span class="keyword">private</span> <span class="type">String</span> email;
+    <span class="keyword">private</span> <span class="type">String</span> adresse;
+    
+    <span class="keyword">public</span> <span class="function">Client</span>() {
+    }
+    
+    <span class="keyword">public</span> <span class="function">Client</span>(<span class="type">int</span> id_client, <span class="type">String</span> nom, <span class="type">String</span> prenom, <span class="type">String</span> email, <span class="type">String</span> adresse) {
+        <span class="keyword">this</span>.id_client = id_client;
+        <span class="keyword">this</span>.nom = nom;
+        <span class="keyword">this</span>.prenom = prenom;
+        <span class="keyword">this</span>.email = email;
+        <span class="keyword">this</span>.adresse = adresse;
+    }
+    
+    <span class="keyword">public</span> <span class="type">int</span> <span class="function">getId_client</span>() { <span class="keyword">return</span> id_client; }
+    <span class="keyword">public</span> <span class="type">String</span> <span class="function">getNom</span>() { <span class="keyword">return</span> nom; }
+    <span class="keyword">public</span> <span class="type">String</span> <span class="function">getPrenom</span>() { <span class="keyword">return</span> prenom; }
+    <span class="keyword">public</span> <span class="type">String</span> <span class="function">getEmail</span>() { <span class="keyword">return</span> email; }
+    <span class="keyword">public</span> <span class="type">String</span> <span class="function">getAdresse</span>() { <span class="keyword">return</span> adresse; }
+    
+    <span class="keyword">public</span> <span class="type">void</span> <span class="function">setId_client</span>(<span class="type">int</span> id) { <span class="keyword">this</span>.id_client = id; }
+    <span class="keyword">public</span> <span class="type">void</span> <span class="function">setNom</span>(<span class="type">String</span> nom) { <span class="keyword">this</span>.nom = nom; }
+    <span class="keyword">public</span> <span class="type">void</span> <span class="function">setPrenom</span>(<span class="type">String</span> prenom) { <span class="keyword">this</span>.prenom = prenom; }
+    <span class="keyword">public</span> <span class="type">void</span> <span class="function">setEmail</span>(<span class="type">String</span> email) { <span class="keyword">this</span>.email = email; }
+    <span class="keyword">public</span> <span class="type">void</span> <span class="function">setAdresse</span>(<span class="type">String</span> adresse) { <span class="keyword">this</span>.adresse = adresse; }</code></pre>
+
+            <h3>3.2 Logique d'Authentification Asynchrone</h3>
+            <p>Pour garantir la fluidité de l'interface (responsive UI), les opérations lourdes comme la connexion à la
+                base de données sont effectuées dans un thread séparé via <code>SwingWorker</code>.</p>
+
+            <h3>3.3 Connexion Base de Données (DBConnection.java)</h3>
+            <p>La gestion de la base de données est centralisée. Pour des raisons de sécurité dans ce rapport, le mot de
+                passe est masqué.</p>
+            <pre><code><span class="keyword">public class</span> <span class="type">DBConnection</span> {
+
+    <span class="keyword">private static final</span> <span class="type">String</span> URL = <span class="string">"jdbc:mysql://localhost:3306/gestion_pharmacie"</span>;
+    <span class="keyword">private static final</span> <span class="type">String</span> USER = <span class="string">"root"</span>;
+    <span class="keyword">private static final</span> <span class="type">String</span> PASSWORD = <span class="string">""</span>; <span class="comment">// Mot de passe vide par sécurité</span>
+
+    <span class="keyword">public static</span> <span class="type">Connection</span> <span class="function">getConnection</span>() <span class="keyword">throws</span> <span class="type">SQLException</span> {
+        <span class="keyword">try</span> {
+            <span class="type">Class</span>.forName(<span class="string">"com.mysql.cj.jdbc.Driver"</span>);
+        } <span class="keyword">catch</span> (<span class="type">ClassNotFoundException</span> e) {
+            <span class="keyword">throw new</span> <span class="type">SQLException</span>(<span class="string">"Driver MySQL non chargé"</span>, e);
+        }
+        <span class="keyword">return</span> <span class="type">DriverManager</span>.getConnection(URL, USER, PASSWORD);
+    }
+}</code></pre>
+        </section>
+
+        <section id="conclusion">
+            <h2>4. Conclusion</h2>
+            <p>Le projet présente une base solide et fonctionnelle. L'interface est propre, le code est structuré et les
+                fonctionnalités principales sont opérationnelles. Les prochaines itérations se concentreront sur
+                l'enrichissement des fonctionnalités de reporting et l'optimisation des flux de vente.</p>
+        </section>
+
+        <footer>
+            <p>Généré le 16 Janvier 2026</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
