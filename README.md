@@ -77,6 +77,7 @@ Gestion d'une Pharmacie/
 |-- schema.sql
 |-- run.bat
 |-- run.ps1
+|-- run_gui.bat
 `-- README.md
 ```
 
@@ -177,6 +178,8 @@ Le rapport HTML complet contenant les captures et l'analyse technique est dispon
 ## Compilation rapide
 
 `run.bat` compile automatiquement les fichiers Java, puis lance `LoginGUI`.
+
+`run_gui.bat` compile egalement avec les fichiers Java encodes en UTF-8 et lance l'interface graphique.
 
 ## Securite
 
